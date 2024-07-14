@@ -6,6 +6,6 @@ public interface ICommand<out TResponse>:IRequest<TResponse>
 {
 }
 
-public interface ICommand : IRequest<Unit>//Represent void type
+public interface ICommand : ICommand<Unit>//Represent void type
 {
 }

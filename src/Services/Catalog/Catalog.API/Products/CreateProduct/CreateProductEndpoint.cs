@@ -10,8 +10,11 @@ public class CreateProductEndpoint : ICarterModule
             var command=request.Adapt<CreateProductCommand>();
             //Mediator Pipeline will reduce dependencies between objects facilitating easier to communication
             var result=await sender.Send(command);
+
             var response=result.Adapt<CreateProductResponse>();
+
             return Results.Created($"/products/{response.Id}",response);
+
         })
         .WithName("CreateProduct")
         .Produces<CreateProductResponse>(StatusCodes.Status201Created)
