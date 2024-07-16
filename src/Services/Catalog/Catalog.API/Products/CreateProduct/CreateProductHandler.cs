@@ -37,5 +37,8 @@ internal class CreateProductCommandHandler(IDocumentSession session) : IRequestH
     //psql -U postgres
     // "\c CatalogDb" connect db
     // "\d" check table
-    //SELECT * FROM mt_doc_product;
+    //SELECT * FROM mt_doc_product
+    //
+
+    //docker-compose -f  docker-compose.yml  -f  docker-compose.override.yml up -d ------>To running docker-compose by terminal
 }
