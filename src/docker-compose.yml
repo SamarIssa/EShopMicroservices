@@ -10,8 +10,8 @@ services:
   distributedcache:
     image: redis
 
-  # orderdb:
-  #   image: mcr.microsoft.com/mssql/server
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
 
   # messagebroker:
   #   image: rabbitmq:management
