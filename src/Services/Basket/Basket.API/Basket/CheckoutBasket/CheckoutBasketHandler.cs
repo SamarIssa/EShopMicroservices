@@ -6,7 +6,7 @@ using MassTransit;
 
 namespace Basket.API.Basket.CheckoutBasket;
 
-public record CheckoutBasketCommand(BasketCheckoutDto BasketCheckoutDto):ICommand<CheckoutBasketResult>;
+public record CheckoutBasketCommand(BasketCheckoutDto BasketCheckoutDto) : ICommand<CheckoutBasketResult>;
 public record CheckoutBasketResult(bool IsSuccessful);
 
 public class CheckoutBasketCommandValidator
@@ -20,13 +20,15 @@ public class CheckoutBasketCommandValidator
 }
 
 public class CheckoutBasketHandler
-    (IBasketRepository repository, IPublishEndpoint publishEndpoint) : 
+    (IBasketRepository repository
+    , IPublishEndpoint publishEndpoint) :
     ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
     public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
     {
-        var basket =await repository.GetBasket(command.BasketCheckoutDto.FirstName);
-        if(basket == null) {
+        var basket = await repository.GetBasket(command.BasketCheckoutDto.UserName);
+        if (basket == null)
+        {
             return new CheckoutBasketResult(false);
         }
 
