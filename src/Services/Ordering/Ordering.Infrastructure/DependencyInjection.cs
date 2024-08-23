@@ -18,12 +18,13 @@ public static class DependencyInjection
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
 
-        services.AddDbContext<ApplicationDbContext>((sp,options)=> { 
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             options.UseSqlServer(connectionString);
         });
-        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
         return services;
     }
     //Command for Add migration in specific dir

@@ -11,14 +11,21 @@ public class GetOrdersHandler(IApplicationDbContext applicationDbContext) : IQue
         var pageIndex= request.PaginationRequest.PageIndex;
         var pageSize= request.PaginationRequest.PageSize;
 
-        var count = await applicationDbContext.Orders.LongCountAsync(cancellationToken);
+       var count = await applicationDbContext.Orders.LongCountAsync(cancellationToken);
 
-        var orders = await applicationDbContext.Orders.Include(x => x.OrderItems)
-            .OrderBy(x => x.OrderName.Value)
-            .Skip(pageIndex * pageSize)
-            .Take(pageSize).ToListAsync(cancellationToken);
+        var orderList = await applicationDbContext.Orders.Include(o => o.OrderItems)
+           .AsNoTracking()
+           .OrderBy(x => x.OrderName.Value)
+           .Skip(pageIndex * pageSize)
+           .Take(pageSize)
+           .ToListAsync(cancellationToken);
 
-        return new GetOrdersQueryResult(new PaginatedResult<OrderDto>(pageIndex, pageSize, count, orders.ToOrderDtoList()));
+        //var orders = await applicationDbContext.Orders.Include(x => x.OrderItems)
+        //    .OrderBy(x => x.OrderName.Value)
+        //    .Skip(pageIndex * pageSize)
+        //    .Take(pageSize).ToListAsync(cancellationToken);
+
+        return new GetOrdersQueryResult(new PaginatedResult<OrderDto>(pageIndex, pageSize, 0, orderList.ToOrderDtoList()));
         
     }
 }

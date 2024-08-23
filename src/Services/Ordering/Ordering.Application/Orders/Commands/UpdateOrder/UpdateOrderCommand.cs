@@ -10,7 +10,7 @@ public class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderCommand>
     {
         RuleFor(x => x.Order.Id).NotEmpty().WithMessage("Order Id is required");
         RuleFor(x => x.Order.OrderName).NotEmpty().WithMessage("Order Name is required");
-        RuleFor(x => x.Order.CustomerID).NotEmpty().WithMessage("Customer is required");
+        RuleFor(x => x.Order.CustomerId).NotEmpty().WithMessage("Customer is required");
     }
 }
 

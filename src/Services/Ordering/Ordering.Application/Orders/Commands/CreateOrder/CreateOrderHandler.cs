@@ -25,7 +25,7 @@ internal class CreateOrderHandler(IApplicationDbContext applicationDbContext) : 
 
         var newOrder = Order.Create(
             OrderId.Of(Guid.NewGuid()),
-            CustomerId.Of(order.CustomerID),
+            CustomerId.Of(order.CustomerId),
             OrderName.Of(order.OrderName),
             shippingAddress, billingAddress,
             Payment.Of(order.Payment.CardName, order.Payment.CardNumber, order.Payment.Expiration,order.Payment.Cvv, order.Payment.PaymentMethod)

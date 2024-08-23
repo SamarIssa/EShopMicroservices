@@ -3,7 +3,7 @@ using Ordering.Application.Orders.Commands.UpdateOrder;
 
 namespace Ordering.Api.EndPoints;
 
-public record UpdateOrderRequest(OrderDto OrderDto);
+public record UpdateOrderRequest(OrderDto Order);
 public record UpdateOrderResponse(bool IsSuccess);
 public class UpdateOrder : ICarterModule
 {
@@ -13,7 +13,7 @@ public class UpdateOrder : ICarterModule
 
             var command = request.Adapt<UpdateOrderCommand>();
 
-            var result=sender.Send(command);
+            var result=await sender.Send(command);
 
             var response = result.Adapt<UpdateOrderResponse>();
 
